@@ -38,9 +38,10 @@ app.disable("x-powered-by");
 
 app.use(cors());
 
-// app.use(  //  for local dev use
+// app.use(
+//   //  for local dev use
 //   cors({
-//     credentials: true,
+//     //credentials: true,
 //     origin: "http://localhost:5173",
 //     methods: ["POST", "GET"],
 //   })
@@ -178,20 +179,23 @@ app.post("/advise", async function (req, res) {
     //const accounts = await User.find({});
     //const users = await db.getCollection("bbcUsers").find({});
     //console.log(db);
+    //    console.log(req.body.problem);
+    let completion = await openai.chat.completions.create({
+      model: "gpt-4o",
+      // (response_format = { type: "json_object" }),
+      messages: [
+        // {
+        //   role: "system",
+        //   content: "You are a helpful assistant designed to output JSON.",
+        // },
+        { role: "user", content: req.body.problem },
+      ],
+    });
 
-    // const completion = await openai.chat.completions.create({
-    //   messages: [{ role: "system", content: "You are a helpful assistant." }],
-    //   model: "gpt-3.5-turbo",
-    // });
+    console.log(completion.choices[0]);
 
-    // console.log(completion.choices[0]);
-
-    return (
-      res
-        .status(200)
-        //.json({ text: completion.choices[0] });
-        .json({ text: "Here is your magic solution from the AI bot." })
-    );
+    return res.status(200).json({ text: completion.choices[0] });
+    //.json({ text: "Here is your magic solution from the AI bot." })
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
