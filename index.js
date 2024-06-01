@@ -23,22 +23,24 @@ const port = `${process.env.PORT}`;
 
 const app = express();
 app.disable("x-powered-by");
-// app.use(
-//   cors({
-//     credentials: true,
-//     allowedHeaders: ["Accept", "Content-Type"],
-//     origin: "https://bbc-frontend-z6g9z.ondigitalocean.app",
-//     methods: ["POST", "GET"],
-//   })
-// );
 
 app.use(
+  // for deployed use
   cors({
-    credentials: true,
-    origin: "http://localhost:5173",
+    //    credentials: true,
+    allowedHeaders: ["Accept", "Content-Type"],
+    origin: "https://aviation-readiness-app-nwiqg.ondigitalocean.app",
     methods: ["POST", "GET"],
   })
 );
+
+// app.use(  //  for local dev use
+//   cors({
+//     credentials: true,
+//     origin: "http://localhost:5173",
+//     methods: ["POST", "GET"],
+//   })
+// );
 
 //app.use(express.json());
 /*
