@@ -186,8 +186,12 @@ app.post("/advise", async function (req, res) {
 
     console.log(completion.choices[0]);
 
-    return res.status(200).json({ text: completion.choices[0] });
-    //      .json({ text: "Here is your magic solution from the AI bot." });
+    return (
+      res
+        .status(200)
+        //.json({ text: completion.choices[0] });
+        .json({ text: "Here is your magic solution from the AI bot." })
+    );
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
