@@ -9,6 +9,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 // import { items, orders, profiles, returns } from "./fakeData.js";
+import OpenAI from "openai";
+const openai = new OpenAI();
 
 const port = `${process.env.PORT}`;
 // const mongoString = `${process.env.DO_URI_HEAD}/bbcUsers${process.env.DO_URI_TAIL}`;
@@ -176,9 +178,16 @@ app.post("/advise", async function (req, res) {
     //const accounts = await User.find({});
     //const users = await db.getCollection("bbcUsers").find({});
     //console.log(db);
-    return res
-      .status(200)
-      .json({ text: "Here is your magic solution from the AI bot." });
+
+    const completion = await openai.chat.completions.create({
+      messages: [{ role: "system", content: "You are a helpful assistant." }],
+      model: "gpt-3.5-turbo",
+    });
+
+    console.log(completion.choices[0]);
+
+    return res.status(200).json({ text: completion.choices[0] });
+    //      .json({ text: "Here is your magic solution from the AI bot." });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
