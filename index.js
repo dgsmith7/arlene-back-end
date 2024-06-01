@@ -44,7 +44,7 @@ app.use(cors());
 //   })
 // );
 
-//app.use(express.json());
+app.use(express.json());
 /*
   Session configuration and utilization of the MongoStore for storing
   the session in the MongoDB database
