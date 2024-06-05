@@ -26,17 +26,17 @@ const port = `${process.env.PORT}`;
 const app = express();
 app.disable("x-powered-by");
 
-// app.use(
-//   // for deployed use
-//   cors({
-//     //    credentials: true,
-//     allowedHeaders: ["Accept", "Content-Type"],
-//     origin: "https://aviation-readiness-app-nwiqg.ondigitalocean.app",
-//     methods: ["POST", "GET"],
-//   })
-// );
+app.use(
+  // for deployed use
+  cors({
+    //    credentials: true,
+    allowedHeaders: ["Accept", "Content-Type"],
+    origin: "https://aviation-readiness-app-a7qnu.ondigitalocean.app",
+    methods: ["POST", "GET"],
+  })
+);
 
-app.use(cors());
+//app.use(cors());
 
 // app.use(
 //   //  for local dev use
@@ -184,10 +184,10 @@ app.post("/advise", async function (req, res) {
       model: "gpt-4o",
       // (response_format = { type: "json_object" }),
       messages: [
-        // {
-        //   role: "system",
-        //   content: "You are a helpful assistant designed to output JSON.",
-        // },
+        {
+          role: "system",
+          content: "You are a helpful assistant designed to output JSON.",
+        },
         { role: "user", content: req.body.problem },
       ],
     });
