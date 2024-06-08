@@ -8,9 +8,9 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
+import * as utils from "./utils/utils.js";
+
 // import { items, orders, profiles, returns } from "./fakeData.js";
-import OpenAI from "openai";
-const openai = new OpenAI();
 
 const port = `${process.env.PORT}`;
 // const mongoString = `${process.env.DO_URI_HEAD}/bbcUsers${process.env.DO_URI_TAIL}`;
@@ -179,25 +179,15 @@ app.post("/advise", async function (req, res) {
     //const accounts = await User.find({});
     //const users = await db.getCollection("bbcUsers").find({});
     //console.log(db);
-    //    console.log(req.body.problem);
-    let completion = await openai.chat.completions.create({
-      model: "gpt-4o",
-      // (response_format = { type: "json_object" }),
-      messages: [
-        {
-          role: "system",
-          content: "You are a helpful assistant.",
-        },
-        { role: "user", content: req.body.problem },
-      ],
-    });
+    let id = await utils.buildThread(req.body.problem);
+    console.log("The ID is ", id);
+    let report = await utils.runThread(id);
 
-    console.log(completion.choices[0]);
-
-    return res.status(200).json({ text: completion.choices[0] });
+    console.log(typeof report, `\n`, report);
+    return res.status(200).json({ text: report });
     //.json({ text: "Here is your magic solution from the AI bot." })
   } catch (error) {
-    console.log(error.message);
+    console.log("This is the error - ", error.message);
     res.status(500).send({ message: error.message });
   }
 });
