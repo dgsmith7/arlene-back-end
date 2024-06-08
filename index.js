@@ -26,17 +26,17 @@ const port = `${process.env.PORT}`;
 const app = express();
 app.disable("x-powered-by");
 
-// app.use(
-//   // for deployed use
-//   cors({
-//     //    credentials: true,
-//     allowedHeaders: ["Accept", "Content-Type"],
-//     origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app",
-//     methods: ["POST", "GET"],
-//   })
-// );
+app.use(
+  // for deployed use
+  cors({
+    //    credentials: true,
+    allowedHeaders: ["Accept", "Content-Type"],
+    origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app",
+    methods: ["POST", "GET"],
+  })
+);
 
-app.use(cors());
+//app.use(cors());
 
 // app.use(
 //   //  for local dev use
