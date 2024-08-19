@@ -88,7 +88,7 @@ const corsOptionsProd = {
   credentials: true,
   allowedHeaders: ["Accept", "Content-Type"],
   origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app",
-  methods: ["POST", "GET"],
+  methods: ["POST", "GET", "OPTIONS"],
 };
 // app.use(
 //   cors(corsOptionsProd)
@@ -258,7 +258,7 @@ app.get("/login-failure", (req, res, next) => {
 app.get("/login-success", async (req, res, next) => {
   logger.log({
     level: "info",
-    message: `Successful 1FA login.`,
+    message: `Successful 1FA login for ${req.user.username} with ${req.user.privileges}.`,
   });
   res.status(200).send({
     message: "Login successful",
