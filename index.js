@@ -113,7 +113,7 @@ const sessOptions = {
   secret: process.env.SECRET_KEY,
   resave: true,
   saveUninitialized: true,
-  sameSite: true,
+  sameSite: false,
   store: new MongoStore({ mongoUrl: db.client.s.url }),
   maxAge: 7200000, //2 hours
   cookie: {},
