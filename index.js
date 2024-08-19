@@ -113,6 +113,7 @@ const sessOptions = {
 //   app.set("trust proxy", 1); // trust first proxy
 //   sessOptions.cookie.secure = true; // serve secure cookies
 // }
+app.set("trust proxy", 1);
 sessOptions.cookie.secure = true; // serve secure cookies
 app.use(session(sessOptions));
 
