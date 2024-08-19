@@ -109,10 +109,11 @@ const sessOptions = {
   maxAge: 7200000, //2 hours
   cookie: {},
 };
-if (app.get("env") === "production") {
-  app.set("trust proxy", 1); // trust first proxy
-  sessOptions.cookie.secure = true; // serve secure cookies
-}
+// if (app.get("env") === "production") {
+//   app.set("trust proxy", 1); // trust first proxy
+//   sessOptions.cookie.secure = true; // serve secure cookies
+// }
+sessOptions.cookie.secure = true; // serve secure cookies
 app.use(session(sessOptions));
 
 /*
