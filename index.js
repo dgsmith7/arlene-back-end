@@ -94,14 +94,15 @@ const corsOptionsProd = {
 //   cors(corsOptionsProd)
 //   //  cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
 // );
-app.use(
-  cors({
-    credentials: true,
-    allowedHeaders: ["Accept", "Content-Type"],
-    origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app/",
-    //    methods: ["POST", "GET"],
-  })
-);
+// app.use(
+//   cors({
+//     credentials: true,
+//     allowedHeaders: ["Accept", "Content-Type"],
+//     origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app",
+//     //    methods: ["POST", "GET"],
+//   })
+// );
+app.use(cors());
 /*
   Session configuration and utilization of the MongoStore for storing
   the session in the MongoDB database
