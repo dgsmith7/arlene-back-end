@@ -91,7 +91,8 @@ const corsOptionsProd = {
   methods: ["POST", "GET"],
 };
 app.use(
-  cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
+  cors(corsOptionsProd)
+  //  cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
 );
 
 /*
