@@ -114,9 +114,10 @@ const sessOptions = {
   resave: true,
   saveUninitialized: true,
   sameSite: false,
+  proxy: true,
   store: new MongoStore({ mongoUrl: db.client.s.url }),
   maxAge: 7200000, //2 hours
-  cookie: {},
+  cookie: { secure: true, sameSite: "none" },
 };
 // if (app.get("env") === "production") {
 //   app.set("trust proxy", 1); // trust first proxy
