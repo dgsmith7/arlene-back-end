@@ -249,6 +249,7 @@ app.post(
 );
 
 app.get("/login-failure", (req, res, next) => {
+  console.log("failure:", req);
   logger.log({
     level: "error",
     message: `FAILED LOGIN by ${req.username}`,
@@ -257,6 +258,7 @@ app.get("/login-failure", (req, res, next) => {
 });
 
 app.get("/login-success", async (req, res, next) => {
+  console.log("success:", req);
   logger.log({
     level: "info",
     message: `Successful 1FA login for ${req.user.username} with ${req.user.privileges}.`,
