@@ -250,7 +250,7 @@ app.post(
   }
 );
 
-app.get("/login-failure", (req, res, next) => {
+app.post("/login-failure", (req, res, next) => {
   logger.log({
     level: "error",
     message: `FAILED LOGIN by ${req.username}`,
@@ -258,7 +258,7 @@ app.get("/login-failure", (req, res, next) => {
   res.status(401).send({ message: "fail", privileges: "unauth" });
 });
 
-app.get("/login-success", async (req, res, next) => {
+app.post("/login-success", async (req, res, next) => {
   logger.log({
     level: "info",
     message: `Successful 1FA login for ${req.user.username} with ${req.user.privileges}.`,
