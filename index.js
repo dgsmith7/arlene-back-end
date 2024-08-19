@@ -113,11 +113,11 @@ const sessOptions = {
   secret: process.env.SECRET_KEY,
   resave: true,
   saveUninitialized: true,
-  sameSite: false,
-  proxy: true,
+  sameSite: true,
+  name: "arleneSessionCookie",
   store: new MongoStore({ mongoUrl: db.client.s.url }),
   maxAge: 7200000, //2 hours
-  cookie: { secure: true, sameSite: "none" },
+  cookie:  {}},
 };
 // if (app.get("env") === "production") {
 //   app.set("trust proxy", 1); // trust first proxy
