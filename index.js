@@ -19,6 +19,14 @@ import { rateLimit } from "express-rate-limit";
 
 const port = `${process.env.PORT}`;
 
+/*
+  MongoDB
+*/
+const dbName = process.env.DO_DB_NAME;
+const mongoString = `${process.env.DO_URI_HEAD}${process.env.DO_DB_NAME}${process.env.DO_URI_TAIL}`;
+await mongoose.connect(mongoString);
+const db = mongoose.connection;
+
 const app = express();
 console.log("We are in " + app.get("env") + " mode.");
 
@@ -28,14 +36,6 @@ console.log("We are in " + app.get("env") + " mode.");
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
-
-/*
-  MongoDB
-*/
-const dbName = process.env.DO_DB_NAME;
-const mongoString = `${process.env.DO_URI_HEAD}${process.env.DO_DB_NAME}${process.env.DO_URI_TAIL}`;
-await mongoose.connect(mongoString);
-const db = mongoose.connection;
 
 /*
   Loggers
@@ -113,11 +113,8 @@ const sessOptions = {
   secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: true,
-  sameSite: true,
-  name: "arleneSessionCookie",
   store: new MongoStore({ mongoUrl: db.client.s.url }),
   maxAge: 7200000, //2 hours
-  cookie: { secure: true },
 };
 // if (app.get("env") === "production") {
 //   app.set("trust proxy", 1); // trust first proxy
@@ -250,7 +247,7 @@ app.post(
   }
 );
 
-app.post("/login-failure", (req, res, next) => {
+app.get("/login-failure", (req, res, next) => {
   logger.log({
     level: "error",
     message: `FAILED LOGIN by ${req.username}`,
@@ -258,7 +255,7 @@ app.post("/login-failure", (req, res, next) => {
   res.status(401).send({ message: "fail", privileges: "unauth" });
 });
 
-app.post("/login-success", async (req, res, next) => {
+app.get("/login-success", async (req, res, next) => {
   logger.log({
     level: "info",
     message: `Successful 1FA login for ${req.user.username} with ${req.user.privileges}.`,
