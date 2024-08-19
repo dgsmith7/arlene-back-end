@@ -115,13 +115,14 @@ const sessOptions = {
   saveUninitialized: true,
   store: new MongoStore({ mongoUrl: db.client.s.url }),
   maxAge: 7200000, //2 hours
+  cookie: { secure: true },
 };
 // if (app.get("env") === "production") {
 //   app.set("trust proxy", 1); // trust first proxy
 //   sessOptions.cookie.secure = true; // serve secure cookies
 // }
 app.set("trust proxy", 1);
-sessOptions.cookie.secure = true; // serve secure cookies
+//sessOptions.cookie.secure = true; // serve secure cookies
 app.use(session(sessOptions));
 
 /*
