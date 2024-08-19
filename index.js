@@ -111,13 +111,13 @@ app.use(cors());
 const sessOptions = {
   httpOnly: true, // set as default - maybe need the remove is not viewable
   secret: process.env.SECRET_KEY,
-  resave: true,
+  resave: false,
   saveUninitialized: true,
   sameSite: true,
   name: "arleneSessionCookie",
   store: new MongoStore({ mongoUrl: db.client.s.url }),
   maxAge: 7200000, //2 hours
-  cookie: {},
+  cookie: { secure: false },
 };
 // if (app.get("env") === "production") {
 //   app.set("trust proxy", 1); // trust first proxy
