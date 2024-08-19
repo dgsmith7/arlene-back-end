@@ -98,7 +98,7 @@ app.use(
   cors({
     credentials: true,
     allowedHeaders: ["Accept", "Content-Type"],
-    origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app",
+    origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app/",
     //    methods: ["POST", "GET"],
   })
 );
