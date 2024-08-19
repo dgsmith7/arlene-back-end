@@ -26,7 +26,8 @@ console.log("We are in " + app.get("env") + " mode.");
   General use
 */
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.text());
+app.use(express.urlencoded({ extended: true }));
 
 /*
   MongoDB
