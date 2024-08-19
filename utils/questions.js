@@ -1,114 +1,106 @@
 export const questions = [
   {
-    title: "objective",
+    title: "organizationName",
+    val: "What is the name of your organization?",
+  },
+  {
+    title: "organizationPrimaryObj",
     val: "What is the primary objective of your optimization problem?",
   },
   {
-    title: "otherObjectiveText",
-    val: "What is the primary objective of your optimization problem?",
-  },
-  {
-    title: "secondaryObjective",
+    title: "organizationSecondaryObj",
     val: "Are there any secondary objectives? If so, please list them.",
   },
   {
-    title: "constraints",
+    title: "organizationConstraints",
     val: "What are the key constraints that need to be considered?",
   },
   {
-    title: "otherConstraintsText",
-    val: "What are the key constraints that need to be considered?",
-  },
-  {
-    title: "compliance",
+    title: "organizationCompliance",
     val: "Are there any specific regulations or compliance requirements that must be met?",
   },
   {
-    title: "opsConstraints",
+    title: "organizationOperationalConst",
     val: "What are the operational constraints (e.g., mission duration, distance, etc.)?",
   },
   {
-    title: "totalSystems",
+    title: "organizationQtySystems",
     val: "Please provide the total number of systems (aircraft) for your aircraft fleet.",
   },
   {
-    title: "systemTypes",
+    title: "organizationTypeSystem",
     val: "Please provide the system types and their specific characteristics for your aircraft fleet.",
   },
   {
-    title: "mtbf",
+    title: "organizationMTBF",
     val: "Please provide the MTBF (Mean Time Between Failures) for system and known subsystems for your aircraft fleet.",
   },
   {
-    title: "avgOpsHrs",
+    title: "organizationHoursPerMonth",
     val: "Please provide the average operational hours per month per system for your aircraft fleet.",
   },
   {
-    title: "mxIntervals",
+    title: "organizationIntervals",
     val: "Provide details on the scheduled maintenance intervals.",
   },
   {
-    title: "turnAround",
+    title: "organizationDepotTurnAround",
     val: "Provide details on the turn-around time for depot-level maintenance.",
   },
   {
-    title: "recentChanges",
+    title: "organizationRecentChanges",
     val: "Provide details on any recent changes to maintenance protocols.",
   },
   {
-    title: "perfData",
+    title: "organizationHistorical",
     val: "What is the historical performance data for the fleet (failure rates, maintenance records, etc.)?",
   },
   {
-    title: "optimization",
+    title: "organizationTypeOptimization",
     val: "What type of optimization are you looking to perform?",
   },
   {
-    title: "otherOptimText",
-    val: "What type of optimization are you looking to perform?",
+    title: "organizationScenarios",
+    val: "Are there specific scenarios you want to analyze (e.g., increased mission tempo, reduced budget, etc.)?",
   },
   {
-    title: "approach",
+    title: "organizationOptimPrefs",
     val: "Do you have any specific preferences for the optimization approach (e.g., linear programming, simulation, heuristic methods, etc.)?",
   },
   {
-    title: "uncertainties",
+    title: "organizationSpecialConsideration",
     val: "Are there any uncertainties or variables that need special consideration (e.g., weather conditions, unexpected mission changes)?",
   },
   {
-    title: "realTime",
+    title: "organizationRealtimeData",
     val: "Do you have access to real-time data or is the data static?",
   },
   {
-    title: "stakeHolders",
+    title: "organizationStakeholders",
     val: "Are there any stakeholder preferences or priorities that need to be factored into the solution?",
   },
   {
-    title: "solution",
+    title: "organizationFormat",
     val: "What format do you expect the final solution to be in?",
   },
   {
-    title: "otherFormatText",
-    val: "What format do you expect the final solution to be in?",
-  },
-  {
-    title: "timeFrame",
+    title: "organizationTimeframe",
     val: "What is the desired time frame for implementing the optimized solution?",
   },
   {
-    title: "metrics",
+    title: "organizationMetrics",
     val: "Are there any specific metrics or KPIs you would like to track to measure the success of the solution?",
   },
   {
-    title: "description",
+    title: "organizationDescription",
     val: "Please provide a brief description of your organization and its mission.",
   },
   {
-    title: "primaryUsers",
+    title: "organizationPrimaries",
     val: "Who will be the primary users of this optimization solution?",
   },
   {
-    title: "comments",
+    title: "organizationAdditionalComments",
     val: "Are there any additional comments or information you believe is crucial for solving this problem?",
   },
 ];
