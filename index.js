@@ -87,7 +87,7 @@ const corsOptionsDev = {
 const corsOptionsProd = {
   credentials: true,
   allowedHeaders: ["Accept", "Content-Type"],
-  origin: "https://bbc-frontend-z6g9z.ondigitalocean.app",
+  origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app",
   methods: ["POST", "GET"],
 };
 app.use(
