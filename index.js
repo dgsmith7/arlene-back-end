@@ -88,13 +88,13 @@ const corsOptionsDev = {
 const corsOptionsProd = {
   credentials: true,
   allowedHeaders: ["Accept", "Content-Type"],
-  origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app",
+  origin: "https://arlene-app.com",
   methods: ["POST", "GET", "OPTIONS"],
 };
 // app.use(
 //   cors(corsOptionsProd)
-//   //  cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
-// );
+//  cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
+//);
 // app.use(
 //   cors({
 //     credentials: true,
@@ -103,7 +103,10 @@ const corsOptionsProd = {
 //     //    methods: ["POST", "GET"],
 //   })
 // );
+
+//   PROD - change to the line below
 app.use(cors());
+
 /*
   Session configuration and utilization of the MongoStore for storing
   the session in the MongoDB database
@@ -121,8 +124,9 @@ const sessOptions = {
 //   app.set("trust proxy", 1); // trust first proxy
 //   sessOptions.cookie.secure = true; // serve secure cookies
 // }
+
+// PROD uncomment line below
 app.set("trust proxy", 1);
-//sessOptions.cookie.secure = true; // serve secure cookies
 app.use(session(sessOptions));
 
 /*
