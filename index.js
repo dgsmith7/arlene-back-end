@@ -96,8 +96,8 @@ const corsOptionsProd = {
 };
 //   PROD - change to the line below
 app.use(
-  cors(corsOptionsProd)
-  // cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
+  //cors(corsOptionsProd)
+  cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
 );
 // app.use(
 //   cors({
@@ -256,7 +256,7 @@ app.post(
 );
 
 app.get("/login-failure", (req, res, next) => {
-  console.log("failure:", req);
+  console.log("failure:", req.sessionID);
   logger.log({
     level: "error",
     message: `FAILED LOGIN by ${req.username}`,
@@ -265,7 +265,7 @@ app.get("/login-failure", (req, res, next) => {
 });
 
 app.get("/login-success", async (req, res, next) => {
-  console.log("success:", req);
+  console.log("success:", req.sessionID);
   logger.log({
     level: "info",
     message: `Successful 1FA login for ${req.user.username} with ${req.user.privileges}.`,
