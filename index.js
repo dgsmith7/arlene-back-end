@@ -91,10 +91,11 @@ const corsOptionsProd = {
   origin: "https://arlene-app.com",
   methods: ["POST", "GET", "OPTIONS"],
 };
-// app.use(
-//   cors(corsOptionsProd)
-//  cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
-//);
+//   PROD - change to the line below
+app.use(
+  cors(corsOptionsProd)
+  // cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
+);
 // app.use(
 //   cors({
 //     credentials: true,
@@ -104,8 +105,7 @@ const corsOptionsProd = {
 //   })
 // );
 
-//   PROD - change to the line below
-app.use(cors());
+//app.use(cors());
 
 /*
   Session configuration and utilization of the MongoStore for storing
