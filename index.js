@@ -88,7 +88,10 @@ const corsOptionsDev = {
 const corsOptionsProd = {
   credentials: true,
   allowedHeaders: ["Accept", "Content-Type"],
-  origin: "https://arlene-app.com",
+  origin: [
+    "https://aviation-readiness-app-sdbks.ondigitalocean.app",
+    "https://arlene-app.com",
+  ],
   methods: ["POST", "GET", "OPTIONS"],
 };
 //   PROD - change to the line below
