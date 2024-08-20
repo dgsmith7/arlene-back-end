@@ -95,18 +95,21 @@ const corsOptionsProd = {
   methods: ["POST", "GET", "OPTIONS"],
 };
 //   PROD - change to the line below
-app.use(
-  //cors(corsOptionsProd)
-  cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
-);
 // app.use(
-//   cors({
-//     credentials: true,
-//     allowedHeaders: ["Accept", "Content-Type"],
-//     origin: "https://aviation-readiness-app-sdbks.ondigitalocean.app",
-//     //    methods: ["POST", "GET"],
-//   })
+//   //cors(corsOptionsProd)
+//   cors(app.get("env") === "production" ? corsOptionsProd : corsOptionsDev)
 // );
+app.use(
+  cors({
+    credentials: true,
+    allowedHeaders: ["Accept", "Content-Type"],
+    origin: [
+      "https://aviation-readiness-app-sdbks.ondigitalocean.app",
+      "https://arlene-app.com",
+    ],
+    methods: ["POST", "GET", "OPTIONS"],
+  })
+);
 
 //app.use(cors());
 
