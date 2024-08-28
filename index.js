@@ -125,6 +125,7 @@ const sessOptions = {
   store: new MongoStore({ mongoUrl: db.client.s.url }),
   maxAge: 7200000, //2 hours
   cookie: { secure: true, sameSite: "none" },
+  name: "arlene.sid",
 };
 // if (app.get("env") === "production") {
 //   app.set("trust proxy", 1); // trust first proxy
