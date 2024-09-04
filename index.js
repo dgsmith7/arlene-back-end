@@ -35,7 +35,7 @@ console.log("We are in " + app.get("env") + " mode.");
   the session in the MongoDB database
 */
 const sessStore = new MongoStore({ mongoUrl: db.client.s.url });
-console.log(sessStore);
+//console.log(sessStore);
 const expiryDate = new Date(Date.now() + 7200000);
 const sessOptions = {
   //  httpOnly: true, // set as default - maybe need the remove is not viewable
@@ -193,6 +193,7 @@ app.post(
   ],
   function async(req, res) {
     const errors = validationResult(req);
+    console.log("Register: ", req.sessionID);
     if (!errors.isEmpty()) {
       //      console.log(...errors);
       return res
@@ -260,6 +261,8 @@ app.post(
   }),
   (req, res, err, next) => {
     const errors = validationResult(req);
+    console.log("Login: ", req.sessionID);
+
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -271,7 +274,7 @@ app.post(
 );
 
 app.get("/login-failure", (req, res, next) => {
-  console.log("failure:", req.sessionID);
+  console.log("login-failure:", req.sessionID);
   logger.log({
     level: "error",
     message: `FAILED LOGIN by ${req.username}`,
@@ -282,7 +285,7 @@ app.get("/login-failure", (req, res, next) => {
 });
 
 app.get("/login-success", async (req, res, next) => {
-  console.log("success:", req.sessionID);
+  console.log("login-success:", req.sessionID);
   logger.log({
     level: "info",
     message: `Successful 1FA login for ${req.user.username} with ${req.user.privileges}.`,
@@ -294,6 +297,8 @@ app.get("/login-success", async (req, res, next) => {
 });
 
 app.post("/logout", (req, res, next) => {
+  console.log("Register: ", req.sessionID);
+
   //  req.session.csrfToken = null;
   req.logout(function (err) {
     if (err) {
@@ -315,6 +320,8 @@ app.post("/logout", (req, res, next) => {
   2FA functions 
 */
 app.post("/mail2fa", async (req, res) => {
+  console.log("Mail2fa: ", req.sessionID);
+
   let code = "";
   code = await utils.nDigitOTP(6, req.session.id);
   req.session.tfa = code;
@@ -338,6 +345,8 @@ app.post("/mail2fa", async (req, res) => {
 });
 
 app.post("/verify2fa", async (req, res) => {
+  console.log("verify2fa: ", req.sessionID);
+
   let code = req.session.tfa;
   req.session.tfa = null;
   let enteredCode = req.body.tfa;
