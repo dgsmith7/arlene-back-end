@@ -128,8 +128,6 @@ const sessOptions = {
   cookie: {
     secure: true,
     httpOnly: true,
-    domain: "example.com",
-    path: "foo/bar",
     expires: expiryDate,
     sameSite: "none",
   },
