@@ -117,6 +117,7 @@ app.use(
   Session configuration and utilization of the MongoStore for storing
   the session in the MongoDB database
 */
+const expiryDate = new Date(Date.now() + 7200000);
 const sessOptions = {
   httpOnly: true, // set as default - maybe need the remove is not viewable
   secret: process.env.SECRET_KEY,
@@ -126,10 +127,13 @@ const sessOptions = {
   maxAge: 7200000, //2 hours
   cookie: {
     secure: true,
-    expires: new Date(Date.now() + 7200000),
+    httpOnly: true,
+    domain: "example.com",
+    path: "foo/bar",
+    expires: expiryDate,
     sameSite: "none",
   },
-  name: "arlene.sid",
+  name: "arleneSessionId",
 };
 // if (app.get("env") === "production") {
 //   app.set("trust proxy", 1); // trust first proxy
