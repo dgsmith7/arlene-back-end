@@ -20,6 +20,17 @@ import { rateLimit } from "express-rate-limit";
 const port = `${process.env.PORT}`;
 
 /*
+  MongoDB
+*/
+const dbName = process.env.DO_DB_NAME;
+const mongoString = `${process.env.DO_URI_HEAD}${dbName}${process.env.DO_URI_TAIL}`;
+await mongoose.connect(mongoString);
+const db = mongoose.connection;
+
+const app = express();
+console.log("We are in " + app.get("env") + " mode.");
+
+/*
   Session configuration and utilization of the MongoStore for storing
   the session in the MongoDB database
 */
@@ -165,17 +176,6 @@ app.use(
     },
   })
 );
-
-/*
-  MongoDB
-*/
-const dbName = process.env.DO_DB_NAME;
-const mongoString = `${process.env.DO_URI_HEAD}${dbName}${process.env.DO_URI_TAIL}`;
-await mongoose.connect(mongoString);
-const db = mongoose.connection;
-
-const app = express();
-console.log("We are in " + app.get("env") + " mode.");
 
 /*
   Register a new user
