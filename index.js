@@ -135,7 +135,7 @@ app.use(
     credentials: true,
     allowedHeaders: ["Accept", "Content-Type"],
     origin: [
-      "https://aviation-readiness-app-sdbks.ondigitalocean.app",
+      "https://aviation-readiness-app-8eg86.ondigitalocean.app",
       "https://arlene-app.com",
     ],
     methods: ["POST", "GET", "OPTIONS"],
