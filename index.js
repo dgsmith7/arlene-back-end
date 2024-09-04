@@ -254,23 +254,19 @@ app.post(
     body("username").notEmpty().withMessage("Username is required"),
     body("password").notEmpty().withMessage("Password is required"),
   ],
-  () => {
-    console.log("mid ", req.body.username);
-  },
-
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
     successRedirect: "/login-success",
   }),
   (req, res, err, next) => {
-    res.redirect("/login-success");
+    //    res.redirect("/login-success");
     //  const errors = validationResult(req);
     // console.log("Login: ", req.sessionID);
 
     // if (!errors.isEmpty()) {
     //   return res.status(400).json({ errors: errors.array() });
     // }
-    // console.log(err.message);
+    console.log(err.message);
   }
 );
 
@@ -287,7 +283,7 @@ app.get("/login-failure", (req, res, next) => {
 
 app.get("/login-success", async (req, res, next) => {
   console.log("login-success:", req.sessionID);
-  //console.log("passport user: ", req);
+  console.log("passport user: ", req.user);
   logger.log({
     level: "info",
     //    message: `Successful 1FA login for ${req.session.passport.user} with ${req.session.passport.privileges}.`,
