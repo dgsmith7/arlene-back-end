@@ -23,7 +23,7 @@ const port = `${process.env.PORT}`;
   MongoDB
 */
 const dbName = process.env.DO_DB_NAME;
-const mongoString = `${process.env.DO_URI_HEAD}${process.env.DO_DB_NAME}${process.env.DO_URI_TAIL}`;
+const mongoString = `${process.env.DO_URI_HEAD}${dbName}${process.env.DO_URI_TAIL}`;
 await mongoose.connect(mongoString);
 const db = mongoose.connection;
 
@@ -114,16 +114,51 @@ app.use(
 //app.use(cors());
 
 /*
+  Passport items - see http://www.passportjs.org/concepts/authentication/
+*/
+const strategy = new LocalStrategy(User.authenticate());
+passport.use(strategy);
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+/*
+  Helmet for headers and attack mitigation
+*/
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        "default-src": ["'self'"],
+        "base-uri": ["'self'"],
+        "font-src": ["'self'"],
+        "form-action": ["'self'"],
+        "frame-ancestors": ["'self'"],
+        "img-src": ["'self'"],
+        "object-src": ["'none'"],
+        "script-src": ["'self'"],
+        "script-src-attr": ["'none'"],
+        "style-src": ["'self'"],
+      },
+      //reportOnly: true;
+    },
+  })
+);
+
+/*
   Session configuration and utilization of the MongoStore for storing
   the session in the MongoDB database
 */
+const sessStore = new MongoStore({ mongoUrl: db.client.s.url });
+console.log(sessStore);
 const expiryDate = new Date(Date.now() + 7200000);
 const sessOptions = {
   //  httpOnly: true, // set as default - maybe need the remove is not viewable
   secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: false,
-  store: new MongoStore({ mongoUrl: db.client.s.url }),
+  store: sessStore, //new MongoStore({ mongoUrl: db.client.s.url }),
   //  maxAge: 7200000, //2 hours
   cookie: {
     secure: true,
@@ -141,39 +176,6 @@ const sessOptions = {
 // PROD uncomment line below
 app.use(session(sessOptions));
 app.set("trust proxy", 1);
-
-/*
-  Passport items - see http://www.passportjs.org/concepts/authentication/
-*/
-const strategy = new LocalStrategy(User.authenticate());
-passport.use(strategy);
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-app.use(passport.initialize());
-app.use(passport.session());
-
-/*
-  Helmet for headers and attack mitigation
-*/
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: {
-//       directives: {
-//         "default-src": ["'self'"],
-//         "base-uri": ["'self'"],
-//         "font-src": ["'self'"],
-//         "form-action": ["'self'"],
-//         "frame-ancestors": ["'self'"],
-//         "img-src": ["'self'"],
-//         "object-src": ["'none'"],
-//         "script-src": ["'self'"],
-//         "script-src-attr": ["'none'"],
-//         "style-src": ["'self'"],
-//       },
-//       //reportOnly: true;
-//     },
-//   })
-// );
 
 /*
   Register a new user
