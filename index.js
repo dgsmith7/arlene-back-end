@@ -124,7 +124,11 @@ const sessOptions = {
   saveUninitialized: true,
   store: new MongoStore({ mongoUrl: db.client.s.url }),
   maxAge: 7200000, //2 hours
-  cookie: { secure: true, sameSite: "none" },
+  cookie: {
+    secure: true,
+    expires: new Date(Date.now() + 7200000),
+    sameSite: "none",
+  },
   name: "arlene.sid",
 };
 // if (app.get("env") === "production") {
@@ -133,8 +137,8 @@ const sessOptions = {
 // }
 
 // PROD uncomment line below
-app.set("trust proxy", 1);
 app.use(session(sessOptions));
+app.set("trust proxy", 1);
 
 /*
   Passport items - see http://www.passportjs.org/concepts/authentication/
