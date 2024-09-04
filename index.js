@@ -263,7 +263,10 @@ app.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    res.status(500).send({ message: "fail", err: err.message });
+    console.log(err.message);
+    res
+      .status(500)
+      .send({ message: "fail - vaidation error", err: err.message });
   }
 );
 
@@ -273,7 +276,9 @@ app.get("/login-failure", (req, res, next) => {
     level: "error",
     message: `FAILED LOGIN by ${req.username}`,
   });
-  res.status(401).send({ message: "fail", privileges: "unauth" });
+  res
+    .status(401)
+    .send({ message: "fail - login failed", privileges: "unauth" });
 });
 
 app.get("/login-success", async (req, res, next) => {
