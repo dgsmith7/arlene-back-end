@@ -119,19 +119,19 @@ app.use(
 */
 const expiryDate = new Date(Date.now() + 7200000);
 const sessOptions = {
-  httpOnly: true, // set as default - maybe need the remove is not viewable
+  //  httpOnly: true, // set as default - maybe need the remove is not viewable
   secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({ mongoUrl: db.client.s.url }),
   //  maxAge: 7200000, //2 hours
-  //  cookie: {
-  secure: true,
-  //   httpOnly: true,
-  expires: expiryDate,
-  sameSite: "none",
-  //  },
-  name: "arleneSessionId",
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    expires: expiryDate,
+    sameSite: "none",
+    name: "arleneSessionId",
+  },
 };
 // if (app.get("env") === "production") {
 //   app.set("trust proxy", 1); // trust first proxy
