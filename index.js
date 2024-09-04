@@ -256,10 +256,10 @@ app.post(
   ],
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
-    //  successRedirect: "/login-success",
+    successRedirect: "/login-success",
   }),
   (req, res, err, next) => {
-    req.redirect("/login-success");
+    //   req.redirect("/login-success");
     // console.log("passport user: ", req.user);
     // console.log("login-success:", req.sessionID);
     // console.log("passport user: ", req.user);
@@ -300,8 +300,8 @@ app.get("/login-failure", (req, res, next) => {
 });
 
 app.get("/login-success", async (req, res, next) => {
-  console.log("login-success:", req.sessionID);
-  console.log("passport user: ", req.user);
+  console.log("login-success:", res.sessionID);
+  console.log("passport user: ", res.user);
   logger.log({
     level: "info",
     //    message: `Successful 1FA login for ${req.session.passport.user} with ${req.session.passport.privileges}.`,
@@ -309,7 +309,7 @@ app.get("/login-success", async (req, res, next) => {
   });
   res.status(200).send({
     message: "Login successful",
-    privileges: req.user.privileges,
+    privileges: res.user.privileges,
   });
 });
 
