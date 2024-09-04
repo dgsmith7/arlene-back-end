@@ -256,7 +256,7 @@ app.post(
   ],
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
-    // successRedirect: "/login-success",
+    successRedirect: "/login-success",
   }),
   (req, res, err, next) => {
     res.redirect("/login-success");
