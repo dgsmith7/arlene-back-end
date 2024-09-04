@@ -155,25 +155,25 @@ app.use(passport.session());
 /*
   Helmet for headers and attack mitigation
 */
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        "default-src": ["'self'"],
-        "base-uri": ["'self'"],
-        "font-src": ["'self'"],
-        "form-action": ["'self'"],
-        "frame-ancestors": ["'self'"],
-        "img-src": ["'self'"],
-        "object-src": ["'none'"],
-        "script-src": ["'self'"],
-        "script-src-attr": ["'none'"],
-        "style-src": ["'self'"],
-      },
-      //reportOnly: true;
-    },
-  })
-);
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         "default-src": ["'self'"],
+//         "base-uri": ["'self'"],
+//         "font-src": ["'self'"],
+//         "form-action": ["'self'"],
+//         "frame-ancestors": ["'self'"],
+//         "img-src": ["'self'"],
+//         "object-src": ["'none'"],
+//         "script-src": ["'self'"],
+//         "script-src-attr": ["'none'"],
+//         "style-src": ["'self'"],
+//       },
+//       //reportOnly: true;
+//     },
+//   })
+// );
 
 /*
   Register a new user
