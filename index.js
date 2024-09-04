@@ -286,9 +286,10 @@ app.get("/login-failure", (req, res, next) => {
 
 app.get("/login-success", async (req, res, next) => {
   console.log("login-success:", req.sessionID);
+  console.log("passport user: ", req.session.passport.user);
   logger.log({
     level: "info",
-    message: `Successful 1FA login for ${req.session.passport.user.username} with ${req.session.passport.user.privileges}.`,
+    message: `Successful 1FA login for ${req.session.passport.user} with ${req.session.passport.privileges}.`,
   });
   res.status(200).send({
     message: "Login successful",
