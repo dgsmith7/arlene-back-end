@@ -256,9 +256,14 @@ app.post(
   ],
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
-    successRedirect: "/login-success",
+    //    successRedirect: "/login-success",
   }),
   (req, res, err, next) => {
+    console.log("passport user: ", req.user);
+    res.status(200).send({
+      message: "Login successful",
+      privileges: req.user.privileges,
+    });
     //    res.redirect("/login-success");
     //  const errors = validationResult(req);
     // console.log("Login: ", req.sessionID);
@@ -266,7 +271,7 @@ app.post(
     // if (!errors.isEmpty()) {
     //   return res.status(400).json({ errors: errors.array() });
     // }
-    console.log(err.message);
+    console.log("error -", err.message);
   }
 );
 
