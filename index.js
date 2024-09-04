@@ -259,19 +259,19 @@ app.post(
     //  successRedirect: "/login-success",
   }),
   (req, res, err, next) => {
-    //res.redirect("/login-success");
-    console.log("passport user: ", req.user);
-    console.log("login-success:", req.sessionID);
-    console.log("passport user: ", req.user);
-    logger.log({
-      level: "info",
-      message: `Successful 1FA login for ${req.session.passport.user} with ${req.session.passport.privileges}.`,
-      //message: `Successful 1FA login for  with .`,
-    });
-    res.status(200).send({
-      message: "Login successful",
-      privileges: req.user.privileges,
-    });
+    res.redirect("/login-success");
+    // console.log("passport user: ", req.user);
+    // console.log("login-success:", req.sessionID);
+    // console.log("passport user: ", req.user);
+    // logger.log({
+    //   level: "info",
+    //   message: `Successful 1FA login for ${req.session.passport.user} with ${req.session.passport.privileges}.`,
+    //   //message: `Successful 1FA login for  with .`,
+    // });
+    // res.status(200).send({
+    //   message: "Login successful",
+    //   privileges: req.user.privileges,
+    // });
 
     // res.status(200).send({
     //   message: "Login successful",
@@ -299,7 +299,7 @@ app.get("/login-failure", (req, res, next) => {
     .send({ message: "fail - login failed", privileges: "unauth" });
 });
 
-app.get("/login-success", async (req, res, next) => {
+app.post("/login-success", async (req, res, next) => {
   console.log("login-success:", req.sessionID);
   console.log("passport user: ", req.user);
   logger.log({
