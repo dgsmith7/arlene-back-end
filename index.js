@@ -259,7 +259,7 @@ app.post(
     //  successRedirect: "/login-success",
   }),
   (req, res, err, next) => {
-    res.redirect("/login-success");
+    //res.redirect("/login-success");
     console.log("passport user: ", req.user);
     console.log("login-success:", req.sessionID);
     console.log("passport user: ", req.user);
