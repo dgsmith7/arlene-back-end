@@ -299,7 +299,7 @@ app.get("/login-failure", (req, res, next) => {
     .send({ message: "fail - login failed", privileges: "unauth" });
 });
 
-app.get("/login-success", async (req, res, next) => {
+app.post("/login-success", async (req, res, next) => {
   console.log("login-success:", req.sessionID);
   console.log("passport user: ", req.user);
   logger.log({
