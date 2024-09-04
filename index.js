@@ -254,10 +254,13 @@ app.post(
     body("username").notEmpty().withMessage("Username is required"),
     body("password").notEmpty().withMessage("Password is required"),
   ],
+  () => {
+    console.log("mid ", req.body.username);
+  },
 
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
-    // successRedirect: "/login-success",
+    successRedirect: "/login-success",
   }),
   (req, res, err, next) => {
     res.redirect("/login-success");
