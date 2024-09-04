@@ -41,7 +41,7 @@ const sessOptions = {
   //  httpOnly: true, // set as default - maybe need the remove is not viewable
   secret: process.env.SECRET_KEY,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: sessStore, //new MongoStore({ mongoUrl: db.client.s.url }),
   //  maxAge: 7200000, //2 hours
   cookie: {
