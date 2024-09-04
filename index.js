@@ -255,11 +255,15 @@ app.post(
     body("password").notEmpty().withMessage("Password is required"),
   ],
 
-  passport.authenticate("local", {
-    failureRedirect: "/login-failure",
-    successRedirect: "/login-success",
-  }),
+  // passport.authenticate("local", {
+  //   failureRedirect: "/login-failure",
+  //   successRedirect: "/login-success",
+  // }),
   (req, res, err, next) => {
+    passport.authenticate("local", {
+      failureRedirect: "/login-failure",
+      successRedirect: "/login-success",
+    });
     const errors = validationResult(req);
     console.log("Login: ", req.sessionID);
 
