@@ -130,7 +130,7 @@ const sessOptions = {
     httpOnly: true,
     expires: expiryDate,
     sameSite: "none",
-    name: "arleneSessionID",
+    name: "sessionID",
   },
 };
 // if (app.get("env") === "production") {
