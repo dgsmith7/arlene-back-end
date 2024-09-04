@@ -124,13 +124,13 @@ const sessOptions = {
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({ mongoUrl: db.client.s.url }),
-  maxAge: 7200000, //2 hours
-  cookie: {
-    secure: true,
-    httpOnly: true,
-    expires: expiryDate,
-    sameSite: "none",
-  },
+  //  maxAge: 7200000, //2 hours
+  //  cookie: {
+  secure: true,
+  //   httpOnly: true,
+  expires: expiryDate,
+  sameSite: "none",
+  //  },
   name: "arleneSessionId",
 };
 // if (app.get("env") === "production") {
