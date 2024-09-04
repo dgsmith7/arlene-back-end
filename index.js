@@ -260,21 +260,14 @@ app.post(
     // successRedirect: "/login-success",
   }),
   (req, res, err, next) => {
-    // passport.authenticate("local", {
-    //   failureRedirect: "/login-failure",
-    //   successRedirect: "/login-success",
-    // });
-    const errors = validationResult(req);
-    console.log("Login: ", req.sessionID);
+    res.redirect("/login-success");
+    //  const errors = validationResult(req);
+    // console.log("Login: ", req.sessionID);
 
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    console.log(err.message);
-    res.status(200).send({
-      message: "Login successful",
-      privileges: req.user.privileges,
-    });
+    // if (!errors.isEmpty()) {
+    //   return res.status(400).json({ errors: errors.array() });
+    // }
+    // console.log(err.message);
   }
 );
 
@@ -291,7 +284,7 @@ app.get("/login-failure", (req, res, next) => {
 
 app.get("/login-success", async (req, res, next) => {
   console.log("login-success:", req.sessionID);
-  console.log("passport user: ", req);
+  //console.log("passport user: ", req);
   logger.log({
     level: "info",
     //    message: `Successful 1FA login for ${req.session.passport.user} with ${req.session.passport.privileges}.`,
