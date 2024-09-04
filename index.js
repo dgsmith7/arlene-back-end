@@ -256,14 +256,14 @@ app.post(
   ],
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
-    //    successRedirect: "/login-success",
+    successRedirect: "/login-success",
   }),
   (req, res, err, next) => {
-    console.log("passport user: ", req.user);
-    res.status(200).send({
-      message: "Login successful",
-      privileges: req.user.privileges,
-    });
+    // console.log("passport user: ", req.user);
+    // res.status(200).send({
+    //   message: "Login successful",
+    //   privileges: req.user.privileges,
+    // });
     //    res.redirect("/login-success");
     //  const errors = validationResult(req);
     // console.log("Login: ", req.sessionID);
