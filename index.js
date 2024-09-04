@@ -255,15 +255,15 @@ app.post(
     body("password").notEmpty().withMessage("Password is required"),
   ],
 
-  // passport.authenticate("local", {
-  //   failureRedirect: "/login-failure",
-  //   successRedirect: "/login-success",
-  // }),
+  passport.authenticate("local", {
+    failureRedirect: "/login-failure",
+    // successRedirect: "/login-success",
+  }),
   (req, res, err, next) => {
-    passport.authenticate("local", {
-      failureRedirect: "/login-failure",
-      successRedirect: "/login-success",
-    });
+    // passport.authenticate("local", {
+    //   failureRedirect: "/login-failure",
+    //   successRedirect: "/login-success",
+    // });
     const errors = validationResult(req);
     console.log("Login: ", req.sessionID);
 
@@ -271,9 +271,10 @@ app.post(
       return res.status(400).json({ errors: errors.array() });
     }
     console.log(err.message);
-    res
-      .status(500)
-      .send({ message: "fail - vaidation error", err: err.message });
+    res.status(200).send({
+      message: "Login successful",
+      privileges: req.user.privileges,
+    });
   }
 );
 
