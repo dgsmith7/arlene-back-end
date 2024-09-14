@@ -36,20 +36,22 @@ console.log("We are in " + app.get("env") + " mode.");
 */
 const sessStore = new MongoStore({ mongoUrl: db.client.s.url });
 //console.log(sessStore);
+app.set("trust proxy", 1);
 const expiryDate = new Date(Date.now() + 7200000);
 const sessOptions = {
   //  httpOnly: true, // set as default - maybe need the remove is not viewable
   secret: process.env.SECRET_KEY,
   resave: false,
-  saveUninitialized: false,
+  proxy: true,
+  saveUninitialized: true,
   store: sessStore, //new MongoStore({ mongoUrl: db.client.s.url }),
   //  maxAge: 7200000, //2 hours
+  name: "sessionID",
   cookie: {
     secure: true,
     httpOnly: true,
     expires: expiryDate,
     sameSite: "none",
-    name: "sessionID",
   },
 };
 // if (app.get("env") === "production") {
@@ -59,7 +61,6 @@ const sessOptions = {
 
 // PROD uncomment line below
 app.use(session(sessOptions));
-app.set("trust proxy", 1);
 
 /*
   General use
