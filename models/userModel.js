@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import passportLocalMongoose from "passport-local-mongoose";
+//import passportLocalMongoose from "passport-local-mongoose";
 
 const UserSchema = mongoose.Schema(
   {

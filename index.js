@@ -16,6 +16,7 @@ import "winston-mongodb";
 import { body, validationResult } from "express-validator";
 //import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
+import { auth } from "express-oauth2-jwt-bearer";
 
 const port = `${process.env.PORT}`;
 
@@ -188,8 +189,8 @@ app.use(limiter);
 /*
   Register a new user
 */
-app.post(
-  "/register",
+// app.post(
+//   "/register",
 //   [
 //     body("email").isEmail().withMessage("Invalid email address"),
 //     body("username")
@@ -199,8 +200,7 @@ app.post(
 //       .isLength({ min: 10, max: 32 })
 //       .withMessage("Password must be at least 10-32 characters long"),
 //   ],
-//  function 
-async(req, res) {
+//   function async(req, res) {
 //     const errors = validationResult(req);
 //     console.log("Register: ", req.sessionID);
 //     if (!errors.isEmpty()) {
@@ -209,17 +209,16 @@ async(req, res) {
 //         .status(400)
 //         .json({ message: errors.array(0), err: errors.array() });
 //     }
-    User.register(
-      new User({
-        email: req.body.email,
-        username: req.body.name,
-        privileges: "Basic", //"Admin",
-        twoFAVerified: false,
-        status: "Active",
-      })
-    ,
+//     User.register(
+//       new User({
+//         email: req.body.email,
+//         username: req.body.username,
+//         privileges: "Basic", //"Admin",
+//         twoFAVerified: false,
+//         status: "Active",
+//       }),
 //       req.body.password,
-       async function (err, msg) {
+//       async function (err, msg) {
 //         if (err) {
 //           if (err.code == "11000") {
 //             logger.log({
@@ -239,21 +238,21 @@ async(req, res) {
 //             res.status(500).send({ message: "fail", err: err.message });
 //           }
 //         } else {
-          await utils.setUpNewUser(req.body.name);
+//           await utils.setUpNewUser(req.body.username);
 //           req.session.firstVisit = true;
-          logger.log({
-            level: "info",
-            message: `${req.body.name} at ${req.body.email} successfully registered.`,
-          });
-          res.send({
-            message: "Successfully registered.",
-            priv: msg.privileges,
-          });
+//           logger.log({
+//             level: "info",
+//             message: `${req.body.username} at ${req.body.email} successfully registered.`,
+//           });
+//           res.send({
+//             message: "Successfully registered.",
+//             priv: msg.privileges,
+//           });
 //         }
-       }
-    );
-
-}
+//       }
+//     );
+//   }
+// );
 
 // /*
 //   Login and logout routes
@@ -507,6 +506,29 @@ async(req, res) {
 //     }
 //   }
 // );
+
+app.post("/register", async (req, res) => {
+  User.register(
+    new User({
+      email: req.body.email,
+      username: req.body.name,
+      privileges: "Basic", //"Admin",
+      twoFAVerified: false,
+      status: "Active",
+    }),
+    async function (err, msg) {
+      await utils.setUpNewUser(req.body.name);
+      logger.log({
+        level: "info",
+        message: `${req.body.name} at ${req.body.email} successfully registered.`,
+      });
+      res.send({
+        message: "Successfully registered.",
+        priv: msg.privileges,
+      });
+    }
+  );
+});
 
 app.post("/updateemail", async (req, res, err) => {
   let newEmail = req.body.newAddress;

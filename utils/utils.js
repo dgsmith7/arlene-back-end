@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import jwt from "jsonwebtoken";
+//import jwt from "jsonwebtoken";
 import { logger } from "../index.js";
 import dotenv from "dotenv";
 dotenv.config();
