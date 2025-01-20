@@ -74,7 +74,7 @@ console.log("We are in " + app.get("env") + " mode.");
 */
 app.use(express.json());
 app.use(express.text());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(jwtCheck);
 
 /*
