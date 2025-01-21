@@ -506,6 +506,20 @@ app.use(limiter);
 //     }
 //   }
 // );
+app.get("/external", async (req, res, err) => {
+  logger.log({
+    level: "info",
+    message: `in external get`,
+  });
+  const token = "You accessed the secure backend!";
+  //console.log("headers: ", req.headers);
+  try {
+    res.status(200).send({ csrfToken: token });
+  } catch (err) {
+    console.log("Error is - ", err);
+    res.status(500).send({ message: "fail", err: err.message });
+  }
+});
 
 app.post("/register", async (req, res) => {
   User.register(
