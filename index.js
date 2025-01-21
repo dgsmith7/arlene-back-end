@@ -595,44 +595,44 @@ app.post("/updateemail", async (req, res, err) => {
   Get account data for a basic privilege requests 
 */
 app.post("/getaccountdata", async (req, res, err) => {
-  let csrfToken = req.headers["x-csrf-token"];
-  let check = req.session.csrfToken;
-  let check2 = await utils.generateCSRFToken(req.session.id);
-  if (csrfToken == check && check == check2) {
-    if (req.isAuthenticated()) {
-      try {
-        const account = await Account.findOne({
-          username: { $eq: req.session.passport.user },
-        }).catch((err) => console.log(err));
-        logger.log({
-          level: "info",
-          message: `Individual account data retreived by ${req.user.username}.`,
-        });
-        return res.status(200).json({
-          data: account,
-          email: req.user.email,
-        });
-      } catch (err) {
-        logger.log({
-          level: "error",
-          message: `Account list retreival by ${req.user.username} failed : ${err.message}.`,
-        });
-        res.status(500).send({ message: "fail", err: err.message });
-      }
-    } else {
-      logger.log({
-        level: "error",
-        message: `Individual account data retreival failed due to no user.`,
-      });
-      res.status(400).send({ message: "Authentication failure" });
-    }
-  } else {
+  //  let csrfToken = req.headers["x-csrf-token"];
+  //  let check = req.session.csrfToken;
+  //  let check2 = await utils.generateCSRFToken(req.session.id);
+  //  if (csrfToken == check && check == check2) {
+  //    if (req.isAuthenticated()) {
+  try {
+    const account = await Account.findOne({
+      username: { $eq: req.session.passport.user },
+    }).catch((err) => console.log(err));
+    logger.log({
+      level: "info",
+      message: `Individual account data retreived by ${req.user.username}.`,
+    });
+    return res.status(200).json({
+      data: account,
+      email: req.user.email,
+    });
+  } catch (err) {
     logger.log({
       level: "error",
-      message: `Individual account data retreival by ${req.user.username} failed due to invalid CSRF Token.`,
+      message: `Account list retreival by ${req.user.username} failed : ${err.message}.`,
     });
-    res.status(400).send({ message: "Authentication failure" });
+    res.status(500).send({ message: "fail", err: err.message });
   }
+  // } else {
+  //   logger.log({
+  //     level: "error",
+  //     message: `Individual account data retreival failed due to no user.`,
+  //   });
+  //   res.status(400).send({ message: "Authentication failure" });
+  // }
+  // } else {
+  //   logger.log({
+  //     level: "error",
+  //     message: `Individual account data retreival by ${req.user.username} failed due to invalid CSRF Token.`,
+  //   });
+  //   res.status(400).send({ message: "Authentication failure" });
+  // }
 });
 
 app.post("/updateaccountdata", async (req, res, err) => {
